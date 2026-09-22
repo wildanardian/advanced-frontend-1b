@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Primary - main */
+  --color-primary-main: #3254FF;
+  --color-primary-main-100: #243FDB;
+  --color-primary-main-200: #192DB7;
+  --color-primary-main-300: #0F1E93;
+  --color-primary-main-400: #09147A;
+
+  /* Dark Theme */
+  --color-dark-main: #3A3541DE;
+  --color-dark-secondary: #3A3541AD;
+  --color-dark-tertiary: #3A354161;
+
+  /* Light Theme */
+  --color-light-main: #E7E3FCDE;
+  --color-light-secondary: #E7E3FCAD;
+  --color-light-tertiary: #E7E3FC61;
+
+  /* Text */
+  --color-secondary-100: #C1C2C4;
+
+  /* Disabled */
+  --color-light-disabled: #9D9EA1;
+
+  /* Other */
+  --color-background-paper: #22282A;
+  --color-background-body: #2F3334;
+  --color-background-page-header: #181A1C;
+  --color-background-extra: #3D4142;
+
+  /* Outline Border */
+  --color-outline-border: #E7E3FC3B;
+  --color-input-border: #E7E3FC38;
+  --color-input-field-background: #E7E3FC0A;
+  --color-chip-background: #E7E3FC14;
+
+  /* Info */
+  --color-info-pressed: #024DB7;
+  --color-info-hover: #0367DB;
+  --color-info-default: #0586FF;
+  --color-info-background: #CDF1FF4D;
+
+  /* Success */
+  --color-success-pressed: #60A125;
+  --color-success-hover: #7EC036;
+  --color-success-default: #9FE04A;
+  --color-success-background: #F4FDDBCC;
+
+  /* Warning */
+  --color-warning-pressed: #B7A207;
+  --color-warning-hover: #DBC40A;
+  --color-warning-default: #FFE70F;
+  --color-warning-background: #FFFCCFCC;
+
+  /* Error */
+  --color-error-pressed: #B71F1D;
+  --color-error-hover: #DB3A2A;
+  --color-error-default: #FF5B3A;
+  --color-error-background: #FFEAD780;
+
+  /* GrayScale */
+  --color-gray-900: #212121;
+  --color-gray-800: #424242;
+  --color-gray-700: #616161;
+  --color-gray-600: #757575;
+  --color-gray-500: #9E9E9E;
+  --color-gray-400: #BDBDBD;
+  --color-gray-300: #E0E0E0;
+  --color-gray-200: #EEEEEE;
+  --color-gray-100: #F5F5F5;
+  --color-gray-50: #FAFAFA;
+
+  /* Gradient */
+  --color-mid-black: #0E0F10;
+
+  --shadow-soft-card: 0px 0px 1px 0px rgba(62, 67, 74, 0.31), 0px 18px 28px 0px rgba(62, 67, 74, 0.15);
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-background-page-header);
+}
+
+@utility text-xxs {
+  font-size: 10px;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
