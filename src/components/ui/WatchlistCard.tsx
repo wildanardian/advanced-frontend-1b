@@ -5,9 +5,10 @@ import { useHoverPreview } from "@/hooks/user-hover-preview";
 import { Check, ChevronDown, Play, Plus } from "lucide-react";
 import { convertMinuteToHour } from "@/utils/convert-minute-to-hour";
 import { useDispatch } from "react-redux";
-import type { AppDispatch, RootState } from "@/slice";
-import { useAppSelector } from "@/slice/hooks";
-import { toggleWatchlist } from "@/slice/watchlistSlice";
+import { useAppSelector } from "../../store/redux/hooks";
+import { addToWatchlist, removeFromWatchlist } from "../../store/redux/dataReducer";
+import { addToWatchlist as addToWatchlistApi } from "../../services/api/addData";
+import { removeFromWatchlist as removeFromWatchlistDeleteApi } from "../../services/api/deleteData";
 
 export interface FilmCardProps {
   content: Content;
@@ -29,10 +30,20 @@ export default function WatchlistCard(props: FilmCardProps) {
   //   props.onToggleWatchlist?.(props.content);
   // };
 
-  const isInWatchlist = useAppSelector((state: RootState) => state.watchlist.items.some((item) => item.id === props.content.id));
-  const dispatch = useDispatch<AppDispatch>();
-  const handleToggleWatchlist = (content: Content) => {
-    dispatch(toggleWatchlist(content));    
+  const isInWatchlist = useAppSelector((state) => state.data.watchlist.some((item) => item.id === props.content.id));
+  const dispatch = useDispatch();
+  const handleToggleWatchlist = async (content: Content) => {
+    try {
+      if (isInWatchlist) {
+        await removeFromWatchlistDeleteApi(content.id);
+        dispatch(removeFromWatchlist(content.id));
+      } else {
+        await addToWatchlistApi(content);
+        dispatch(addToWatchlist(content));
+      }
+    } catch (error) {
+      console.error("Error toggling watchlist:", error);
+    }
   };
 
   return (

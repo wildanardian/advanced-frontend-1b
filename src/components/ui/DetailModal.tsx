@@ -1,8 +1,8 @@
 // features/film/components/DetailModal.tsx
 import { dummyContentDetails } from '@/data/dummyContentDetail';
 import { dummyFilms } from '@/data/dummyFilm';
-import { closeDetailModal } from '@/slice/detailModalSlice';
-import { useAppDispatch, useAppSelector } from '@/slice/hooks';
+import { closeDetailModal } from '../../store/redux/detailModalSlice';
+import { useAppDispatch, useAppSelector } from '../../store/redux/hooks';
 import { Plus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { DUMMY_USERS } from "@/data/dummyUser";
-import { useAppDispatch } from "@/slice/hooks";
+import { useAppDispatch } from "../../store/redux/hooks";
 
 import AuthCard from "@/components/ui/auth/AuthCard";
 import AuthField from "@/components/ui/auth/AuthField";
@@ -11,7 +11,7 @@ import useBodyBackground from "@/hooks/use-body-background";
 import LogoNew from "@/assets/images/logo/logo-new.png";
 import BackgroundLogin from "@/assets/images/background/bg-signin.jpg";
 import GoogleIcon from "@/assets/icons/google.png";
-import { login } from "@/slice/authSlice";
+import { login } from "../../store/redux/authSlice";
 
 export default function Login() {
   useBodyBackground({ imageUrl: BackgroundLogin });

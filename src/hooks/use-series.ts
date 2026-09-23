@@ -1,27 +1,27 @@
-import { getSeries } from "@/features/series/series.api";
-import type { Series } from "@/features/film/film.types";
-import { useEffect, useState } from "react";
+import { getSeries } from "@/services/api/getData";
+import { useAppDispatch, useAppSelector } from "../store/redux/hooks";
+import { setSeries, setLoading, setError } from "../store/redux/dataReducer";
+import { useEffect } from "react";
 
 export const useSeries = () => {
-  const [series, setSeries] = useState<Series[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const series = useAppSelector((state) => state.data.series);
+  const status = useAppSelector((state) => state.data.status);
+  const error = useAppSelector((state) => state.data.error);
 
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        setIsLoading(true);
+        dispatch(setLoading());
         const data = await getSeries();
-        setSeries(data);
+        dispatch(setSeries(data));
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-      } finally {
-        setIsLoading(false);
+        dispatch(setError(err instanceof Error ? err.message : "An error occurred"));
       }
     };
 
     fetchSeries();
-  }, []);
+  }, [dispatch]);
 
-  return { series, isLoading, error };
+  return { series, isLoading: status === 'loading', error };
 }

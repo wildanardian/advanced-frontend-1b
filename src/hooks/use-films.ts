@@ -1,28 +1,33 @@
-import { getFilms } from "@/features/film/film.api";
-import type { Film } from "@/features/film/film.types";
-import { useCallback, useEffect, useState } from "react";
+import { getFilms } from "@/services/api/getData";
+import { useAppDispatch, useAppSelector } from "../store/redux/hooks";
+import { setFilms, setLoading, setError } from "../store/redux/dataReducer";
+import { useCallback, useEffect } from "react";
+// import type { Content } from "@/features/film/film.types";
 
 export const useFilms = () => {
-  const [films, setFilms] = useState<Film[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const films = useAppSelector((state) => state.data.films);
+  const status = useAppSelector((state) => state.data.status);
+  const error = useAppSelector((state) => state.data.error);
 
   const fetchFilms = useCallback(async () => {
     try {
+      dispatch(setLoading());
       const data = await getFilms();
-      setFilms(data);
-      setError(null);
+      dispatch(setFilms(data));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
-    } finally {
-      setIsLoading(false);
+      dispatch(setError(err instanceof Error ? err.message : 'An unknown error occurred'));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchFilms();
   }, [fetchFilms]);
 
-  return { films, isLoading, error, refetch: fetchFilms };
+  return { 
+    films, 
+    isLoading: status === 'loading', 
+    error, 
+    refetch: fetchFilms 
+  };
 }

@@ -10,8 +10,8 @@ import ProfileIcon from "@/assets/icons/profile.svg";
 import StarIcon from "@/assets/icons/star.svg";
 import LogoutIcon from "@/assets/icons/logout.svg";
 import useClickOutside from "@/hooks/use-click-outside";
-import { useAppDispatch, useAppSelector } from "@/slice/hooks";
-import { logout } from "@/slice/authSlice";
+import { useAppDispatch, useAppSelector } from "../../store/redux/hooks";
+import { logout } from "../../store/redux/authSlice";
 
 export function Navbar() {
   const navLinkClass =

@@ -1,42 +1,6 @@
-// import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-// import type { Content } from "@/features/film/film.types";
-// import type { RootState } from './index';
-
-// interface WatchlistState {
-//   items: Content[];
-// }
-
-// const initialState: WatchlistState = {
-//   items: [],
-// }
-
-// const watchlistSlice = createSlice({
-//   name: 'watchlist',
-//   initialState,
-//   reducers: {
-//     toggleWatchlist: (state, action: PayloadAction<Content>) => {
-//       const exist = state.items.some((item) => item.id === action.payload.id);
-//       if (exist) {
-//         state.items = state.items.filter((item) => item.id !== action.payload.id);
-//       } else {
-//         state.items.push(action.payload);
-//       }
-//       console.log('isi dari watchlist sekarang:', state.items);
-//     }
-//   }
-// });
-
-// // export semua reducer yang ada di slice ini agar bisa digunakan di store
-// export const { toggleWatchlist } = watchlistSlice.actions;
-// export default watchlistSlice.reducer;
-
-// export const selectIsInWatchlist = (contentId: string) => (state: RootState) =>
-//   state.watchlist.items.some((item) => item.id === contentId);
-
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { watchlistRepository } from "../../services/watchlist/index";
 import type { Content } from "@/features/film/film.types";
-import { watchlistRepository } from "@/services/watchlist";
 
 export const fetchWatchlist = createAsyncThunk('watchlist/fetch', async () => {
   return await watchlistRepository.getAll();

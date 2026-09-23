@@ -8,6 +8,7 @@ import ContinueWatchingCard from './components/ContinueWatchingCard';
 import { dummyContinueWatching } from '@/data/dummyContinueWatch';
 import { useFilms } from '@/hooks/use-films';
 import Loading from '@/components/ui/Loading';
+import type { Content } from '../film/film.types';
 
 export default function Home() {
   const { films, isLoading, error } = useFilms();
@@ -52,7 +53,7 @@ export default function Home() {
           renderItem={(item) => (
             <FilmCard
               key={item.id}
-              content={item}
+              content={item as Content}
               onClick={() => { }}
               onPlay={() => console.log('Play button clicked')}
               onToggleWatchlist={() => console.log('Toggle Watchlist button clicked')}

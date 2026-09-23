@@ -1,5 +1,5 @@
 import {Navigate, Outlet} from "react-router";
-import {useAppSelector} from "@/slice/hooks";
+import {useAppSelector} from "../../store/redux/hooks";
 
 interface ProtectedRouteProps {
   allowedRoles?: Array<"admin" | "user">;

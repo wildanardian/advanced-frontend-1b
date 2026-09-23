@@ -4,10 +4,12 @@ import { HoverPreviewPortal } from "./HoverPreviewPortal";
 import { useHoverPreview } from "@/hooks/user-hover-preview";
 import { Check, ChevronDown, Play, Plus } from "lucide-react";
 import { convertMinuteToHour } from "@/utils/convert-minute-to-hour";
-import { useAppDispatch, useAppSelector } from "@/slice/hooks";
-import { toggleWatchlist } from "@/slice/watchlistSlice";
-import { openDetailModal } from "@/slice/detailModalSlice";
+import { useAppDispatch, useAppSelector } from "../../store/redux/hooks";
+import { addToWatchlist, removeFromWatchlist } from "../../store/redux/dataReducer";
+import { openDetailModal } from "../../store/redux/detailModalSlice";
 import { useNavigate } from "react-router-dom";
+import { addToWatchlist as addToWatchlistApi } from "../../services/api/addData";
+import { removeFromWatchlist as removeFromWatchlistDeleteApi } from "../../services/api/deleteData";
 
 export interface FilmCardProps {
   content: Content;
@@ -40,13 +42,24 @@ export default function FilmCard(props: FilmCardProps) {
   // const dispatch = useDispatch<AppDispatch>();
   const dispatch = useAppDispatch();
   const isInWatchlist = useAppSelector((state) =>
-    state.watchlist.items.some((item) => item.id === props.content.id)
+    state.data.watchlist.some((item) => item.id === props.content.id)
   );
 
-  const handleToggle = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleToggle = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     console.log('toggle watchlist', props.content);
-    dispatch(toggleWatchlist(props.content));
+    
+    try {
+      if (isInWatchlist) {
+        await removeFromWatchlistDeleteApi(props.content.id);
+        dispatch(removeFromWatchlist(props.content.id));
+      } else {
+        await addToWatchlistApi(props.content);
+        dispatch(addToWatchlist(props.content));
+      }
+    } catch (error) {
+      console.error("Error toggling watchlist:", error);
+    }
   }
 
   return (

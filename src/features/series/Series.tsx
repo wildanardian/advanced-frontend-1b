@@ -7,6 +7,7 @@ import FilmCard from "@/components/ui/FilmCard";
 import seriesHeroBanner from "@/assets/images/hero/hero-series-section-banner.png";
 import { useSeries } from "@/hooks/use-series";
 import Loading from "@/components/ui/Loading";
+import type { Content } from "../film/film.types";
 
 export default function Series() {
   const {series, isLoading, error} = useSeries();
@@ -51,7 +52,7 @@ export default function Series() {
           renderItem={(item) => (
             <FilmCard
               key={item.id}
-              content={item}
+              content={item as Content}
               onClick={() => { }}
               onPlay={() => console.log('Play button clicked')}
               onToggleWatchlist={() => console.log('Toggle Watchlist button clicked')}

@@ -1,10 +1,6 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface DetailModalState {
-  selectedContentId: string | null;
-}
-
-const initialState: DetailModalState = {
+const initialState = {
   selectedContentId: null,
 }
 
@@ -12,7 +8,7 @@ const detailModalSlice = createSlice({
   name: 'detailModal',
   initialState,
   reducers: {
-    openDetailModal: (state, action: PayloadAction<string>) => {
+    openDetailModal: (state, action) => {
       state.selectedContentId = action.payload;
     },
     closeDetailModal: (state) => {

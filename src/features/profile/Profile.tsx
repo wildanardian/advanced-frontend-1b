@@ -4,7 +4,7 @@ import fileUploadIcon from "@/assets/icons/file-upload-outline.png";
 import { Button } from "@/components/ui/Button";
 import InputField from "@/components/ui/InputField";
 import { type FormEventHandler, useState } from "react";
-import { useAppSelector } from "@/slice/hooks";
+import { useAppSelector } from "@/store/redux/hooks";
 import { Navigate } from "react-router-dom";
 import { DUMMY_USERS } from "@/data/dummyUser";
 import SubscriptionCard from "./components/SubscriptionCard";

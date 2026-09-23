@@ -1,24 +1,8 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: "admin" | "user";
-  password: string;
-  isSubscriptionActive: boolean;
-  subscriptionPlan: string;
-  subscriptionExpiryDate: Date;
-}
-
-interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
-}
+import { createSlice } from "@reduxjs/toolkit";
 
 const AUTH_STORAGE_KEY = "chill_auth";
 
-function loadAuthFromStorage(): User | null {
+function loadAuthFromStorage() {
   try {
     const raw = localStorage.getItem(AUTH_STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
@@ -27,7 +11,7 @@ function loadAuthFromStorage(): User | null {
   }
 }
 
-const initialState: AuthState = {
+const initialState = {
   user: loadAuthFromStorage(),
   isAuthenticated: !!loadAuthFromStorage(),
 }
@@ -36,7 +20,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login : (state, action: PayloadAction<User>) => {
+    login : (state, action) => {
       state.user = action.payload;
       state.isAuthenticated = true;
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(action.payload));
