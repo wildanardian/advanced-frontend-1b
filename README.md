@@ -1,4 +1,4 @@
-untuk versi live ada di : 
+untuk versi live ada di : https://advanced-frontend-1b.vercel.app
 
 Fitur Sekarang: 
 - Login
@@ -6,8 +6,12 @@ Fitur Sekarang:
 - Ambil data Film, Series dari MockAPI
 - Manage Film di Dashboard Admin
 
-Login sebagai admin: 
+Login sebagai admin yang sudah ada subscription: 
 username : admin
+password : password
+
+Login sebagai user tanpa subscription
+username : wildan
 password : password
 
 Url dashboar admin: 

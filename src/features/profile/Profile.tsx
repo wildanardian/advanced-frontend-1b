@@ -11,17 +11,23 @@ import SubscriptionCard from "./components/SubscriptionCard";
 
 export default function Profile() {
   const user = useAppSelector((state) => state.auth.user);
+  // const profileUser = user
+  //   ? (DUMMY_USERS.find(
+  //     (dummyUser) =>
+  //       dummyUser.id === user.id ||
+  //       dummyUser.email === user.email ||
+  //       dummyUser.name === user.name ||
+  //       dummyUser.isSubscriptionActive === user.isSubscriptionActive ||
+  //       dummyUser.subscriptionPlan === user.subscriptionPlan ||
+  //       dummyUser.subscriptionExpiryDate === user.subscriptionExpiryDate,
+  //   ) ?? user)
+  //   : DUMMY_USERS[0];
+
   const profileUser = user
-    ? (DUMMY_USERS.find(
-      (dummyUser) =>
-        dummyUser.id === user.id ||
-        dummyUser.email === user.email ||
-        dummyUser.name === user.name ||
-        dummyUser.isSubscriptionActive === user.isSubscriptionActive ||
-        dummyUser.subscriptionPlan === user.subscriptionPlan ||
-        dummyUser.subscriptionExpiryDate === user.subscriptionExpiryDate,
+  ? (DUMMY_USERS.find(
+      (dummyUser) => dummyUser.id === user.id || dummyUser.email === user.email,
     ) ?? user)
-    : DUMMY_USERS[0];
+  : DUMMY_USERS[0];
 
   const [name, setName] = useState(profileUser?.name ?? "");
   const [email, setEmail] = useState(profileUser?.email ?? "");

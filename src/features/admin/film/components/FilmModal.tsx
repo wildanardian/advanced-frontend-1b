@@ -48,8 +48,8 @@ export function FilmModal({ mode, film, onSubmit, onClose }: FilmModalProps) {
       await onSubmit(
         { ...form, 
           synopsis: film?.synopsis ?? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          poster_url: film?.poster_url ?? "/src/assets/images/placeholder/placeholder-image-vertical.png",
-          banner_url: film?.banner_url ?? "/src/assets/images/placeholder/placeholder.jpeg",
+          poster_url: film?.poster_url ?? "/assets/images/placeholder/placeholder-image-vertical.png",
+          banner_url: film?.banner_url ?? "/assets/images/placeholder/placeholder.jpeg",
           genres: idsToLabels(form.genres) 
         });
     } catch (error) {
